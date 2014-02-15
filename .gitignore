@@ -1,0 +1,14 @@
+.bundle
+tmp/
+.sass-cache/
+*~
+*.DS_Store
+*.out
+*.swp
+.sass-cache/
+.sass-cache/*
+.sass-cache/**
+tmp/
+tmp/*/*
+tmp/**
+*/*.swp
