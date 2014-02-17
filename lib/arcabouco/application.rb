@@ -1,4 +1,5 @@
 module Arcabouco
+
   def self.root
     @@root
   end
