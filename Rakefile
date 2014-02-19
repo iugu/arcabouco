@@ -12,9 +12,17 @@ end
 
 Bundler::GemHelper.install_tasks
 
-desc "Testing"
-task :test do
-  1
+require "rake/testtask"
+
+# desc "Testing"
+#
+# task :test do
+#   1
+# end
+
+Rake::TestTask.new() do |t|
+  t.libs << "test"
+  t.pattern = "test/**/*_test.rb"
 end
 
 task :default => :test

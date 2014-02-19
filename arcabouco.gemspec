@@ -34,4 +34,6 @@ Gem::Specification.new do |s|
   s.add_dependency 'yui-compressor'
 
   s.add_dependency 'compass'
+
+  s.add_dependency 'rake'
 end

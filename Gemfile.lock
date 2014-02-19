@@ -8,6 +8,7 @@ PATH
       guard-sprockets
       haml
       rack
+      rake
       sass
       sinatra
       sprockets
@@ -19,6 +20,7 @@ PATH
 GEM
   remote: https://rubygems.org/
   specs:
+    ansi (1.4.3)
     celluloid (0.15.2)
       timers (~> 1.1.0)
     celluloid-io (0.15.0)
@@ -65,6 +67,7 @@ GEM
       rb-inotify (>= 0.9)
     lumberjack (1.0.4)
     method_source (0.8.2)
+    minitest (5.2.0)
     multi_json (1.8.4)
     nio4r (1.0.0)
     pry (0.9.12.6)
@@ -74,6 +77,7 @@ GEM
     rack (1.5.2)
     rack-protection (1.5.2)
       rack
+    rake (10.1.0)
     rb-fsevent (0.9.4)
     rb-inotify (0.9.3)
       ffi (>= 0.5.0)
@@ -100,6 +104,8 @@ GEM
     thor (0.18.1)
     tilt (1.4.1)
     timers (1.1.0)
+    turn (0.9.6)
+      ansi
     yui-compressor (0.12.0)
 
 PLATFORMS
@@ -107,3 +113,5 @@ PLATFORMS
 
 DEPENDENCIES
   arcabouco!
+  minitest
+  turn
