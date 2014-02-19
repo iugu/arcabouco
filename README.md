@@ -2,6 +2,3 @@
 [![Build Status](https://travis-ci.org/iugu/arcabouco.png?branch=master)](https://travis-ci.org/iugu/arcabouco)
 
 Arcabouco - Framework for WebApp
-
-TODO:
-Add Travis CI
