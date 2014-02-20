@@ -12,4 +12,4 @@ end
 
 require 'arcabouco'
 
-Arcabouco::Application.run
+Arcabouco::Command.run
