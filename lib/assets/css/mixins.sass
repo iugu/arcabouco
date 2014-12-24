@@ -1,0 +1,28 @@
+@mixin box-mode
+  box-sizing: border-box
+  -ms-box-sizing: border-box
+  -moz-box-sizing: border-box
+  -webkit-box-sizing: border-box
+
+@mixin block( $size:1 )
+  width: #{($size * $baseBlockSize)}
+
+@mixin text-overflow()
+  overflow: hidden
+  text-overflow: ellipsis
+  white-space: nowrap
+
+@mixin transition( $transition )
+  -webkit-transition: $transition
+  -moz-transition: $transition
+  -ms-transition: $transition
+  -o-transition: $transition
+  transition: $transition
+
+@mixin user-select( $select )
+  -webkit-user-select: $select
+  -moz-user-select: $select
+  -ms-user-select: $select
+  -o-user-select: $select
+  user-select: $select
+

@@ -1,7 +1,9 @@
 require 'sinatra'
 require 'sinatra/base'
 require 'sprockets'
-require 'pathname';
+require 'compass'
+require 'sprockets-sass'
+require 'pathname'
 
 Encoding.default_external = Encoding::UTF_8
 Encoding.default_internal = Encoding::UTF_8
@@ -13,8 +15,8 @@ module Arcabouco
 
     set :views, Proc.new { Arcabouco.root + '/app' }
 
-    def initialize(root)
-      self.base_dir = File.expand_path(root)
+    def initialize()
+      self.base_dir = Arcabouco.root
       super
     end
 
@@ -34,8 +36,8 @@ module Arcabouco
   class Server
     attr_accessor :root
 
-    def initialize(options)
-      self.root = options[:root] 
+    def initialize
+      self.root = Arcabouco.root
     end
 
     def run
@@ -43,8 +45,10 @@ module Arcabouco
       $environment.append_path 'app/media'
       $environment.append_path 'app/js'
       $environment.append_path 'app/css'
+      $environment.append_path File.join(Arcabouco.gem_root,'assets','css')
+      $environment.append_path File.join(Arcabouco.gem_root,'assets','js')
 
-      app = Arcabouco::WebServer.new(self.root)
+      app = Arcabouco::WebServer.new
 
       rack = Rack::Builder.new do
         map '/app.assets' do

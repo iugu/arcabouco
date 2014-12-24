@@ -1,3 +1,5 @@
+require 'slop'
+
 module Arcabouco
 
   class Command
@@ -9,6 +11,17 @@ module Arcabouco
     end
 
     def run(args = ARGV)
+      opts = Slop.parse do
+        banner 'Usage: arcabouco [options]'
+
+        on 's', 'server', 'Run as server'
+      end
+      Arcabouco::Application.new
+      if opts.server?
+        run_server
+      else
+        puts opts
+      end
     end
 
     private
@@ -23,8 +36,7 @@ module Arcabouco
       end
 
       def run_server
-        puts "Starting WebServer" 
-        # Arcabouco::Server.new.run
+        Arcabouco::Server.new.run
       end
   end
 
