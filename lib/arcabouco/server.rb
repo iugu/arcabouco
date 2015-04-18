@@ -23,10 +23,6 @@ module Arcabouco
       super
     end
 
-    def assets_list
-      %w(jquery.js app.css app.js vendor.js vendor.css *.png)
-    end
-
     def relative_to
       "../" + Pathname.new(File.expand_path('../templates', File.dirname(__FILE__))).relative_path_from(Pathname.new(Arcabouco.root)).to_s
       # Pathname.new(File.expand_path('../templates', File.dirname(__FILE__))).relative_path_from(Pathname.new(Arcabouco.root)).to_s
@@ -42,7 +38,7 @@ module Arcabouco
       content_type :json
       obj = {}
       obj['assets'] = {}
-      assets_list.each do |asset|
+      Arcabouco.asset_list.each do |asset|
         next if asset.to_s.index("*")
         obj['assets'][asset] = "/app.assets/" + $environment[asset.to_s].digest_path
       end
@@ -129,7 +125,7 @@ module Arcabouco
       prepare_env_for_build
 
       manifest = Sprockets::Manifest.new(env, Arcabouco.root + "/public/app.assets/manifest.json")
-      manifest.compile self.web.assets_list
+      manifest.compile Arcabouco.asset_list
 
       compile_view "/", "index.html"
       compile_view "/save_app.html", "save_app.html"
