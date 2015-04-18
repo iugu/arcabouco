@@ -49,11 +49,12 @@
         }
       }
 
-      function addScriptTag(src)
+      function addScriptTag(src,onload)
       {
         var newScript = document.createElement('script');
         newScript.type = 'text/javascript';
         newScript.src = '/app.assets/' + src;
+        newScript.onload = onload;
         document.head.appendChild(newScript);
       }
 
@@ -66,8 +67,10 @@
         jQuery.getJSON( app.assets_manifest, function(data) {
           $('head').append('<link rel="stylesheet" href="/app.assets/' + data.assets["vendor.css"] + '" type="text/css" />');
           $('head').append('<link rel="stylesheet" href="/app.assets/' + data.assets["app.css"] + '" type="text/css" />');
-          addScriptTag( data.assets['vendor.js'] );
-          addScriptTag( data.assets['app.js'] );
+          addScriptTag( data.assets['vendor.js'], function() {
+            // After vendor is loaded. Start application
+            addScriptTag( data.assets['app.js'] );
+          });
         });
       }
 
