@@ -15,10 +15,13 @@ module Arcabouco
         banner 'Usage: arcabouco [options]'
 
         on 's', 'server', 'Run as server'
+        on 'b', 'build', 'Build'
       end
       Arcabouco::Application.new
       if opts.server?
         run_server
+      elsif opts.build?
+        run_build
       else
         puts opts
       end
@@ -38,6 +41,12 @@ module Arcabouco
       def run_server
         Arcabouco::Server.new.run
       end
+
+      def run_build
+        server = Arcabouco::Server.new
+        server.build()
+      end
+
   end
 
 end

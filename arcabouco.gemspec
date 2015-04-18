@@ -20,11 +20,13 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
 
   s.add_dependency 'rack'
+  s.add_dependency 'rack-test'
   s.add_dependency 'sinatra'
   s.add_dependency 'thin'
   s.add_dependency 'sprockets'
   s.add_dependency 'sprockets-sass'
   s.add_dependency 'sprockets-helpers'
+  s.add_dependency 'handlebars_assets'
   s.add_dependency 'coffee-script'
   s.add_dependency 'haml'
   s.add_dependency 'sass'
@@ -33,6 +35,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'eco'
   s.add_dependency 'guard-sprockets'
   s.add_dependency 'yui-compressor'
+  s.add_dependency 'uglifier'
 
   s.add_dependency 'compass'
 
