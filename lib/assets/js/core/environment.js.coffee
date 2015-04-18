@@ -1,4 +1,3 @@
-window.app = {}
 @app = window.app
 @app._routers = []
 @app.routes = {}

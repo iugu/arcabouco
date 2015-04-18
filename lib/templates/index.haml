@@ -3,12 +3,8 @@
   -# Set a base Title (From Partial maybe?)
     %link{:href => "//iugu.com/imgs/favicon.ico", :rel => "icon"}/
     %link{:href => "//iugu.com/imgs/favicon.ico", :rel => "shortcut icon"}/
-  %title ...
+  %title ......
   %meta{ :charset => "utf-8" }
-
-  %link{:rel => :stylesheet, :type => :"text/css", :href => "/app.assets/#{assets['app.css'].digest_path}" } 
-  %script{:type => :"text/javascript", :src => "/app.assets/#{assets['vendor.js'].digest_path}"}
-  %script{:type => :"text/javascript", :src => "/app.assets/#{assets['app.js'].digest_path}"}
 
   %meta{ :name => "viewport", :content => "width=device-width, initial-scale=1, maximum-scale=1" }
   %meta{ :name => "apple-mobile-web-app-capable", :content => "yes" }
@@ -22,17 +18,3 @@
     .js-warning
 
   #app
-    %h1
-      Application Place Holder
-
-  -# Need to render additional footer
-  -# Google Tag Manager and footer additional scripts
-  -# Best to have a base_footer
-
-  %script
-    (function() { $(function() {
-    if (typeof(run_webapp) == 'function')
-    return run_webapp(true);
-    });
-    }).call(this);
-

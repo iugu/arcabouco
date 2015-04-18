@@ -23,16 +23,43 @@ module Arcabouco
       super
     end
 
+    def assets_list
+      %w(jquery.js app.css app.js vendor.js vendor.css *.png)
+    end
+
     def relative_to
       "../" + Pathname.new(File.expand_path('../templates', File.dirname(__FILE__))).relative_path_from(Pathname.new(Arcabouco.root)).to_s
+      # Pathname.new(File.expand_path('../templates', File.dirname(__FILE__))).relative_path_from(Pathname.new(Arcabouco.root)).to_s
     end
 
     get '/manifest.appcache' do
-      erb :"#{relative_to}/manifest", :locals => { :assets => $environment }
+      index_digest = Digest::MD5.new 
+      index_digest.update content_for_index
+      erb :"#{relative_to}/manifest", :locals => { :assets => $environment, :index_digest => index_digest.hexdigest }
+    end
+
+    get '/manifest.json' do
+      content_type :json
+      obj = {}
+      obj['assets'] = {}
+      assets_list.each do |asset|
+        next if asset.to_s.index("*")
+        obj['assets'][asset] = "/app.assets/" + $environment[asset.to_s].digest_path
+      end
+      obj.to_json
+    end
+
+    def content_for_index
+      erb :"#{relative_to}/index.html", locals: { :assets => $environment }, layout: false, cache: false
+    end
+
+    get '/save_app.html' do
+      erb :"#{relative_to}/save_app.html"
     end
 
     get '/*' do
-      haml :"#{relative_to}/index", locals: { :assets => $environment }, layout: false
+      expires 0, :public, :'no-cache', :must_revalidate # Expire in 1 minute, require Auth
+      content_for_index
     end
   end
 
@@ -40,6 +67,7 @@ module Arcabouco
     attr_accessor :root
     attr_accessor :rack
     attr_accessor :env
+    attr_accessor :web
 
     def initialize
       self.root = Arcabouco.root
@@ -66,7 +94,8 @@ module Arcabouco
     end
 
     def setup_rack
-      app = Arcabouco::WebServer.new
+      self.web = Arcabouco::WebServer.new
+      web = self.web
 
       # app_css.write_to( Arcabouco.root + "/public/app-#{app_css.digest}.min.css" )
       $environment = self.get_env()
@@ -74,7 +103,7 @@ module Arcabouco
         map '/app.assets' do
           run $environment
         end
-        run app
+        run web
       end
       self.rack
     end
@@ -92,6 +121,7 @@ module Arcabouco
       self.env.css_compressor = :sass
     end
 
+
     def build
       FileUtils.mkpath Arcabouco.root + "/public"
       FileUtils.mkpath Arcabouco.root + "/public/app.assets"
@@ -99,9 +129,10 @@ module Arcabouco
       prepare_env_for_build
 
       manifest = Sprockets::Manifest.new(env, Arcabouco.root + "/public/app.assets/manifest.json")
-      manifest.compile(%w(app.css app.js vendor.js vendor.css *.png))
+      manifest.compile self.web.assets_list
 
       compile_view "/", "index.html"
+      compile_view "/save_app.html", "save_app.html"
       compile_view "/manifest.appcache", "manifest.appcache"
     end
 

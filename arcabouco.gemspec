@@ -31,6 +31,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'haml'
   s.add_dependency 'sass'
   s.add_dependency 'slop'
+  s.add_dependency 'therubyracer'
 
   s.add_dependency 'eco'
   s.add_dependency 'guard-sprockets'

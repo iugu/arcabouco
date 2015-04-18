@@ -10,8 +10,8 @@ module Arcabouco
 
       def configure_root_directory
         Arcabouco.gem_root = File.expand_path("../..",__FILE__)
-        Dir.chdir "."
-        Arcabouco.root = File.expand_path Dir.getwd
+        Arcabouco.root = File.expand_path Bundler.root
+        Dir.chdir Arcabouco.root
       end
   end
 end
