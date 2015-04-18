@@ -53,7 +53,7 @@
       {
         var newScript = document.createElement('script');
         newScript.type = 'text/javascript';
-        newScript.src = src;
+        newScript.src = '/app.assets/' + src;
         document.head.appendChild(newScript);
       }
 
@@ -64,8 +64,8 @@
         console.log("START");
         console.log("FETCH " + app.assets_manifest );
         jQuery.getJSON( app.assets_manifest, function(data) {
-          $('head').append('<link rel="stylesheet" href="' + data.assets["vendor.css"] + '" type="text/css" />');
-          $('head').append('<link rel="stylesheet" href="' + data.assets["app.css"] + '" type="text/css" />');
+          $('head').append('<link rel="stylesheet" href="/app.assets/' + data.assets["vendor.css"] + '" type="text/css" />');
+          $('head').append('<link rel="stylesheet" href="/app.assets/' + data.assets["app.css"] + '" type="text/css" />');
           addScriptTag( data.assets['vendor.js'] );
           addScriptTag( data.assets['app.js'] );
         });

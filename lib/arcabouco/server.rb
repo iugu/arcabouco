@@ -40,7 +40,7 @@ module Arcabouco
       obj['assets'] = {}
       Arcabouco.asset_list.each do |asset|
         next if asset.to_s.index("*")
-        obj['assets'][asset] = "/app.assets/" + $environment[asset.to_s].digest_path
+        obj['assets'][asset] = $environment[asset.to_s].digest_path
       end
       obj.to_json
     end
