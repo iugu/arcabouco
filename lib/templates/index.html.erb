@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html class='no-js not-ready'>
+  <head>
+    <title>...</title>
+    <meta charset='utf-8'>
+    <meta content='width=device-width, initial-scale=1, maximum-scale=1' name='viewport'>
+    <meta content='yes' name='apple-mobile-web-app-capable'>
+    <meta content='black' name='apple-mobile-web-status-bar-style'>
+    <meta content='on' http-equiv='cleartype'>
+    <meta content='IE=edge,chrome=1' http-equiv='X-UA-Compatible'>
+    <meta content='320' name='MobileOptimized'>
+    <script type="text/javascript" src="/app.assets/<%= assets['jquery.js'].digest_path %>"></script>
+  </head>
+  <body>
+    <noscript>
+      <div class='js-warning'></div>
+    </noscript>
+    <div id='app'></div>
+
+    <script type="text/javascript">
+      window.app = {}
+      window.app.bootstraped = false;
+      window.app.assets_manifest = "/<%= ENV['RACK_ENV'] == 'production' ? 'app.assets/manifest.json' : 'manifest.json' %>";
+
+      function currentCacheStatus() {
+        appCache = app.applicationCache;
+        switch (appCache.status) {
+          case appCache.UNCACHED: // UNCACHED == 0
+            return 'UNCACHED';
+          break;
+          case appCache.IDLE: // IDLE == 1
+            return 'IDLE';
+          break;
+          case appCache.CHECKING: // CHECKING == 2
+            return 'CHECKING';
+          break;
+          case appCache.DOWNLOADING: // DOWNLOADING == 3
+            return 'DOWNLOADING';
+          break;
+          case appCache.UPDATEREADY:  // UPDATEREADY == 4
+            return 'UPDATEREADY';
+          break;
+          case appCache.OBSOLETE: // OBSOLETE == 5
+            return 'OBSOLETE';
+          break;
+          default:
+            return 'UKNOWN CACHE STATUS';
+          break;
+        }
+      }
+
+      function addScriptTag(src)
+      {
+        var newScript = document.createElement('script');
+        newScript.type = 'text/javascript';
+        newScript.src = src;
+        document.head.appendChild(newScript);
+      }
+
+      function bootstrapApplication()
+      {
+        if (app.bootstraped) return;
+        app.bootstraped = true;
+        console.log("START");
+        console.log("FETCH " + app.assets_manifest );
+        jQuery.getJSON( app.assets_manifest, function(data) {
+          $('head').append('<link rel="stylesheet" href="' + data.assets["vendor.css"] + '" type="text/css" />');
+          $('head').append('<link rel="stylesheet" href="' + data.assets["app.css"] + '" type="text/css" />');
+          addScriptTag( data.assets['vendor.js'] );
+          addScriptTag( data.assets['app.js'] );
+        });
+      }
+
+      function updateApplicationDownloadProgress(progress)
+      {
+        if (app.bootstraped) return;
+        console.log("New asset downloaded"); 
+      }
+
+      function refreshApplicationFiles()
+      {
+        if (app.bootstraped == false) {
+          app.applicationCache.swapCache();
+          bootstrapApplication();
+        }
+        else {
+          if (confirm('A new version of this application is available. Load it?')) {
+            window.location.reload();
+          } 
+        }
+      }
+
+      $(document).ready( function() {
+        appcache_frame = $('<iframe>').attr('src', '/save_app.html').load(function() {
+          app.applicationCache = appcache_frame.contentWindow.applicationCache;
+
+          app.applicationCache.addEventListener('noupdate', bootstrapApplication, false);
+          app.applicationCache.addEventListener('updateready', refreshApplicationFiles, false);
+          app.applicationCache.addEventListener('progress', function(e) { updateApplicationDownloadProgress(e); }, false);
+
+          setInterval(function() {
+            console.log("Checking for new versions");
+            app.applicationCache.update();
+          }, 10*1000);
+
+        }).appendTo('head')[0]
+      });
+    </script>
+  </body>
+</html>
