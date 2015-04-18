@@ -12,3 +12,6 @@ tmp/
 tmp/*/*
 tmp/**
 */*.swp
+pkg/
+pkg/*/*
+
