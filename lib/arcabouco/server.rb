@@ -6,6 +6,7 @@ require 'compass'
 require 'sprockets-sass'
 require 'handlebars_assets'
 require 'pathname'
+require 'uglifier'
 
 Encoding.default_external = Encoding::UTF_8
 Encoding.default_internal = Encoding::UTF_8
@@ -46,12 +47,17 @@ module Arcabouco
     end
 
     def content_for_index
+
       application_preload_html = ""
       application_preloader_filename = File.join Arcabouco.root, 'app', 'templates', 'application_preloader.html'
       if File.file?(application_preloader_filename)
         application_preload_html = File.read application_preloader_filename
       end
-      erb :"#{relative_to}/index.html", locals: { :assets => $environment, :application_name => Arcabouco.application_name, :application_preload_html => application_preload_html}, layout: false, cache: false
+
+      main_js = Uglifier.compile(File.read(File.join(Arcabouco.gem_root,'templates','bootstrap_code.js')))
+      
+
+      erb :"#{relative_to}/index.html", locals: { :assets => $environment, :application_name => Arcabouco.application_name, :application_preload_html => application_preload_html, :main_js => main_js }, layout: false, cache: false
     end
 
     get '/save_app.html' do

@@ -40,7 +40,7 @@ module Arcabouco
   mattr_accessor :asset_list
   mattr_accessor :application_name
  
-  self.asset_list = %w(jquery.js app.css app.js vendor.js vendor.css *.png *.jpg *.gif *.mp3 *.wav)
+  self.asset_list = %w(app.css app.js vendor.js vendor.css *.png *.jpg *.gif *.mp3 *.wav)
   self.application_name = "Arcabouco Application"
 
   def self.setup
