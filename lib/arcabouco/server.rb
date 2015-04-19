@@ -46,7 +46,7 @@ module Arcabouco
     end
 
     def content_for_index
-      erb :"#{relative_to}/index.html", locals: { :assets => $environment }, layout: false, cache: false
+      erb :"#{relative_to}/index.html", locals: { :assets => $environment, :application_name => Arcabouco.application_name}, layout: false, cache: false
     end
 
     get '/save_app.html' do

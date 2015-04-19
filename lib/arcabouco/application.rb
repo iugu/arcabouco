@@ -2,8 +2,11 @@ module Arcabouco
   class Application
     def initialize
       configure_root_directory
-      puts "Configured root #{Arcabouco.root}"
-      puts "Configured gem root #{Arcabouco.gem_root}"
+      puts "Booting Arcabouco #{Arcabouco::VERSION}"
+      config_filename = File.join Arcabouco.root, 'config.rb'
+      if File.file?(config_filename)
+        require config_filename
+      end
     end
 
     private

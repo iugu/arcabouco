@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    arcabouco (0.1.5)
+    arcabouco (0.1.6)
       coffee-script
       compass
       eco
