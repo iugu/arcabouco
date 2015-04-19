@@ -9,7 +9,6 @@
     <meta content='on' http-equiv='cleartype'>
     <meta content='IE=edge,chrome=1' http-equiv='X-UA-Compatible'>
     <meta content='320' name='MobileOptimized'>
-    <script type="text/javascript" src="/app.assets/<%= assets['jquery.js'].digest_path %>"></script>
   </head>
   <body>
     <noscript>
@@ -18,6 +17,7 @@
     <div id="application_preload_layer" style="position:absolute;top:0px;right:0px;left:0px;bottom:0px"><%= application_preload_html %></div>
     <div id='app'></div>
 
+    <script type="text/javascript" src="/app.assets/<%= assets['jquery.js'].digest_path %>"></script>
     <script type="text/javascript">
       window.app = {}
       window.app.confirm = function(message, callback) {
