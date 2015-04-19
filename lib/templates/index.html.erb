@@ -15,6 +15,7 @@
     <noscript>
       <div class='js-warning'></div>
     </noscript>
+    <div id="application_preload_layer" style="position:absolute;top:0px;right:0px;left:0px;bottom:0px"><%= application_preload_html %></div>
     <div id='app'></div>
 
     <script type="text/javascript">
@@ -67,14 +68,16 @@
       {
         if (app.bootstraped) return;
         app.bootstraped = true;
-        console.log("START");
+        console.log("START UPDATED");
         console.log("FETCH " + app.assets_manifest );
         jQuery.getJSON( app.assets_manifest, function(data) {
           $('head').append('<link rel="stylesheet" href="/app.assets/' + data.assets["vendor.css"] + '" type="text/css" />');
           $('head').append('<link rel="stylesheet" href="/app.assets/' + data.assets["app.css"] + '" type="text/css" />');
           addScriptTag( data.assets['vendor.js'], function() {
             // After vendor is loaded. Start application
-            addScriptTag( data.assets['app.js'] );
+            addScriptTag( data.assets['app.js'], function() {
+              $('#application_preload_layer').remove();
+            });
           });
         });
       }
@@ -87,8 +90,8 @@
 
       function refreshApplicationFiles()
       {
+        app.applicationCache.swapCache();
         if (app.bootstraped == false) {
-          app.applicationCache.swapCache();
           bootstrapApplication();
         }
         else {
@@ -103,13 +106,14 @@
           app.applicationCache = appcache_frame.contentWindow.applicationCache;
 
           app.applicationCache.addEventListener('noupdate', bootstrapApplication, false);
+          app.applicationCache.addEventListener('cached', bootstrapApplication, false);
           app.applicationCache.addEventListener('updateready', refreshApplicationFiles, false);
           app.applicationCache.addEventListener('progress', function(e) { updateApplicationDownloadProgress(e); }, false);
 
           setInterval(function() {
             console.log("Checking for new versions");
             app.applicationCache.update();
-          }, 60*5*1000);
+          }, 10*60*1000);
 
         }).appendTo('head')[0]
       });

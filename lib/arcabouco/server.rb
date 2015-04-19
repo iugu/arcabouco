@@ -46,7 +46,12 @@ module Arcabouco
     end
 
     def content_for_index
-      erb :"#{relative_to}/index.html", locals: { :assets => $environment, :application_name => Arcabouco.application_name}, layout: false, cache: false
+      application_preload_html = ""
+      application_preloader_filename = File.join Arcabouco.root, 'app', 'templates', 'application_preloader.html'
+      if File.file?(application_preloader_filename)
+        application_preload_html = File.read application_preloader_filename
+      end
+      erb :"#{relative_to}/index.html", locals: { :assets => $environment, :application_name => Arcabouco.application_name, :application_preload_html => application_preload_html}, layout: false, cache: false
     end
 
     get '/save_app.html' do
