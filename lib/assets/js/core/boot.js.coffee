@@ -8,7 +8,7 @@ app.module_ready = (name) ->
 
 app.load_modules = ->
   for module,status of app._bootstrap_list
-    return if status == 1
+    return if status == false
 
   app.debug 'Loaded modules: '
   for name of app._bootstrap_list
@@ -29,5 +29,5 @@ app.boot = ->
   if app.document_domain
     document.domain = app.document_domain
 
-  app._bootstrap_list_loader = setInterval( @load_modules, 250 )
+  app._bootstrap_list_loader = setInterval( app.load_modules, 250 )
   app.load_modules()
