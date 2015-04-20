@@ -6,7 +6,9 @@ CACHE:
 
 <% if assets['app.js'] %>/app.assets/<%= assets['app.js'].digest_path %><% end %>
 
-<% if assets['vendor.js'] %>/app.assets/<%= assets['vendor.js'].digest_path %><% end %>
+<% if assets['app.vendor.css'] %>/app.assets/<%= assets['app.vendor.css'].digest_path %><% end %>
+
+<% if assets['app.vendor.js'] %>/app.assets/<%= assets['app.vendor.js'].digest_path %><% end %>
 
 NETWORK:
 *

@@ -1,3 +1,4 @@
 window.app.debug = (message) ->
-  if (window.app.enable_debug)
-    console.log message
+  return unless window.app.enable_debug
+  console.log message
+
