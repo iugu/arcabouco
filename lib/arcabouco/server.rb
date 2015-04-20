@@ -60,7 +60,7 @@ module Arcabouco
       erb :"#{relative_to}/index.html", locals: { :assets => $environment, :application_name => Arcabouco.application_name, :application_preload_html => application_preload_html, :main_js => main_js }, layout: false, cache: false
     end
 
-    get '/save_app.html' do
+    get '/save_app' do
       erb :"#{relative_to}/save_app.html"
     end
 
@@ -139,7 +139,7 @@ module Arcabouco
       manifest.compile Arcabouco.asset_list
 
       compile_view "/", "index.html"
-      compile_view "/save_app.html", "save_app.html"
+      compile_view "/save_app", "save_app.html"
       compile_view "/manifest.appcache", "manifest.appcache"
     end
 
