@@ -52,7 +52,7 @@ GEM
       eco-source
       execjs
     eco-source (1.1.0.rc.1)
-    eventmachine (1.0.7)
+    eventmachine (1.0.8)
     execjs (2.5.2)
     ffi (1.9.8)
     formatador (0.2.5)
@@ -79,7 +79,7 @@ GEM
     hike (1.2.3)
     hitimes (1.2.2)
     json (1.8.2)
-    libv8 (3.16.14.7)
+    libv8 (3.16.14.13)
     listen (2.10.0)
       celluloid (~> 0.16.0)
       rb-fsevent (>= 0.9.3)
@@ -148,3 +148,6 @@ DEPENDENCIES
   arcabouco!
   minitest
   turn
+
+BUNDLED WITH
+   1.10.6
