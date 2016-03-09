@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    arcabouco (0.2.3)
+    arcabouco (0.2.4)
       coffee-script
       compass
       guard-sprockets
