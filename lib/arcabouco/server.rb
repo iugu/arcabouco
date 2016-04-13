@@ -2,6 +2,7 @@ require 'sinatra'
 require 'sinatra/base'
 require 'rack/test'
 require 'sprockets'
+require 'sprockets-helpers'
 require 'compass'
 require 'sprockets-sass'
 require 'handlebars_assets'
@@ -90,6 +91,9 @@ module Arcabouco
       self.env.append_path HandlebarsAssets.path
       self.env.append_path File.join(Arcabouco.gem_root,'assets','css')
       self.env.append_path File.join(Arcabouco.gem_root,'assets','js')
+      Sprockets::Helpers.configure do |config|
+        config.prefix = '/app.assets'
+      end
     end
 
     def get_env
