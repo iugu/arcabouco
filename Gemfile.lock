@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    arcabouco (0.2.5)
+    arcabouco (0.2.6)
       coffee-script
       compass
       guard-sprockets
@@ -45,7 +45,7 @@ GEM
       sass (>= 3.2, < 3.5)
     daemons (1.2.3)
     eventmachine (1.2.0.1)
-    execjs (2.6.0)
+    execjs (2.7.0)
     ffi (1.9.10)
     formatador (0.2.5)
     guard (2.13.0)
@@ -76,7 +76,7 @@ GEM
     lumberjack (1.0.10)
     method_source (0.8.2)
     minitest (5.2.0)
-    multi_json (1.11.2)
+    multi_json (1.12.1)
     nenv (0.3.0)
     notiffany (0.0.8)
       nenv (~> 0.1)
@@ -90,7 +90,7 @@ GEM
       rack
     rack-test (0.6.3)
       rack (>= 1.0)
-    rake (11.0.1)
+    rake (11.1.2)
     rb-fsevent (0.9.7)
     rb-inotify (0.9.7)
       ffi (>= 0.5.0)
@@ -134,6 +134,3 @@ DEPENDENCIES
   arcabouco!
   minitest
   turn
-
-BUNDLED WITH
-   1.10.6
