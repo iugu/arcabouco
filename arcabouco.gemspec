@@ -33,7 +33,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'slop', '~>3.6'
   s.add_dependency 'therubyracer'
 
-  s.add_dependency 'guard-sprockets'
+  s.add_development_dependency 'guard-sprockets', '=0.3.1'
   s.add_dependency 'yui-compressor'
   s.add_dependency 'uglifier'
 
