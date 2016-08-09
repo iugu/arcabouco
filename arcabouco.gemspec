@@ -22,7 +22,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'rack'
   s.add_dependency 'rack-test'
   s.add_dependency 'sinatra'
-  s.add_dependency 'thin', '~>1.6'
+  s.add_dependency 'thin'
   s.add_dependency 'sprockets'
   s.add_dependency 'sprockets-sass'
   s.add_dependency 'sprockets-helpers'
@@ -34,10 +34,10 @@ Gem::Specification.new do |s|
   s.add_dependency 'therubyracer'
 
   s.add_dependency 'guard-sprockets'
-  s.add_dependency 'yui-compressor', '~>0.12'
-  s.add_dependency 'uglifier', '~>3.0'
+  s.add_dependency 'yui-compressor'
+  s.add_dependency 'uglifier'
 
-  s.add_dependency 'compass', '~>1.0'
+  s.add_dependency 'compass'
 
   s.add_dependency 'rake'
 end
