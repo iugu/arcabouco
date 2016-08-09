@@ -30,7 +30,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'coffee-script'
   s.add_dependency 'haml'
   s.add_dependency 'sass'
-  s.add_dependency 'slop'
+  s.add_dependency 'slop', '~>3.6'
   s.add_dependency 'therubyracer'
 
   s.add_dependency 'guard-sprockets'
