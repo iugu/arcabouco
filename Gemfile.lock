@@ -1,9 +1,9 @@
 PATH
   remote: .
   specs:
-    arcabouco (0.2.8)
+    arcabouco (0.2.9)
       coffee-script
-      compass
+      compass (~> 1.0)
       guard-sprockets
       haml
       handlebars_assets
@@ -17,9 +17,9 @@ PATH
       sprockets-helpers
       sprockets-sass
       therubyracer
-      thin
-      uglifier
-      yui-compressor
+      thin (~> 1.6)
+      uglifier (~> 3.0)
+      yui-compressor (~> 0.12)
 
 GEM
   remote: https://rubygems.org/
