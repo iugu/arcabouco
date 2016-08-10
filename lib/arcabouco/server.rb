@@ -93,6 +93,7 @@ module Arcabouco
       self.env.append_path File.join(Arcabouco.gem_root,'assets','js')
       Sprockets::Helpers.configure do |config|
         config.prefix = '/app.assets'
+        config.digest = true
       end
     end
 
@@ -109,6 +110,7 @@ module Arcabouco
       web = self.web
 
       # app_css.write_to( Arcabouco.root + "/public/app-#{app_css.digest}.min.css" )
+      self.prepare_env_for_server()
       $environment = self.get_env()
       self.rack = Rack::Builder.new do
         map '/app.assets' do
@@ -130,6 +132,10 @@ module Arcabouco
     def prepare_env_for_build
       self.env.js_compressor = :uglify
       self.env.css_compressor = :sass
+    end
+
+    def prepare_env_for_server
+      self.env.append_path 'public/app.assets'
     end
 
 

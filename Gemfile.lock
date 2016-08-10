@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    arcabouco (0.2.11)
+    arcabouco (0.2.12)
       coffee-script
       compass
       haml
