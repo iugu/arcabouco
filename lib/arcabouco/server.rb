@@ -155,7 +155,9 @@ module Arcabouco
 
     def run
       thin = Rack::Handler.get('thin')
-      thin.run self.rack
+      thin.run( self.rack, {
+        :Port => ENV['PORT'] || 8080
+      })
     end
   end
 
